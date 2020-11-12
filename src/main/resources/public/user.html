@@ -6,6 +6,11 @@
 </head>
 <body>
     <script>
+            function markDone(id, userId, key) {
+                console.log(id);
+                console.log(userId);
+                console.log(key);
+            }
             function httpGetData(userId)
             {
                 var xmlHttp = new XMLHttpRequest();
@@ -35,7 +40,7 @@
                 document.write("<h3>"+key + "</h3><br/>");
                 Object.keys(value).forEach(function(date) {
                     var stars = value[date];
-                    document.write("<h5>"+date + " </h5>" + stars + "<button id='" + date + "'> </button>" +"<br/>");
+                    document.write("<h5>"+date + " </h5>" + stars + "<button onClick=markDone(this.id, userId, key) id='" + date + "'>Mark Done</button>" +"<br/>");
                 });
             });
             console.log(userHabits);
