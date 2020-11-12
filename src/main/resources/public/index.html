@@ -23,6 +23,10 @@
                 }
                 return null;
             }
+            var userId = getCookie('userId');
+            if(userId!=null) {
+                window.location = "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/user.html";
+            }
             function createUser() {
                 var xmlHttp = new XMLHttpRequest();
                 var currency = "INR";
@@ -49,7 +53,7 @@
                 console.log(xmlHttp.responseText);
                 alert(xmlHttp.responseText);
                 var userIdJson = JSON.parse(xmlHttp.responseText);
-                setCookie('loggedin', userIdJson['userId'],7);
+                setCookie('userId', userIdJson['userId'],7);
                 if(userIdJson['userId']!=null) {
                    window.location = "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/user.html";
                 }
