@@ -18,11 +18,18 @@
                 alert(xmlHttp.responseText);
             }
     </script>
+    <style>
+      .inputForm{
+          border-radius:5px;
+          -moz-border-radius:5px;
+          -webkit-border-radius:5px;
+       }
+    </style>
 </head>
 <body>
-    <input type="text" id="username" placeholder="username" />
+    <input type="text" id="username" placeholder="username" class="inputForm" />
     <br/>
-    <input type="text" id="password" placeholder="password" />
+    <input type="text" id="password" placeholder="password" class="inputForm" />
     <br/>
     <button onclick=createUser()>Create User</button>
 </body>
