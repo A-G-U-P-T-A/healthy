@@ -13,6 +13,20 @@
                 xmlHttp.send( null );
                 return xmlHttp.responseText;
             }
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                }
+                return null;
+            }
+            var userId = getCookie('userId');
+            if(userId==null) {
+                window.location = "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com";
+            }
             var orders = httpGetData();
             var ordersIdList = orders.substring(1,orders.length-1).split(",");
             for(i=0;i<ordersIdList.length;i++) {
