@@ -11,6 +11,23 @@
                 console.log(userId);
                 console.log(key);
             }
+            function createUser() {
+                var xmlHttp = new XMLHttpRequest();
+                var currency = "INR";
+                const params = {
+                        username: document.getElementById('name').value,
+                        userId: getCookie('userId'),
+                        frequency: document.getElementById('frequency').value,
+                        startDate: document.getElementById('startdate').value,
+                        endDate: document.getElementById('enddate').value,
+                        hour: document.getElementById('hour').value
+                };
+                xmlHttp.open( "POST", "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/createuser", false );
+                xmlHttp.setRequestHeader('Content-type', 'application/json');
+                xmlHttp.send(JSON.stringify(params));
+                console.log(xmlHttp.responseText);
+                alert(xmlHttp.responseText);
+            }
             function httpGetData(userId)
             {
                 var xmlHttp = new XMLHttpRequest();
@@ -45,5 +62,22 @@
             });
             console.log(userHabits);
     </script>
+    <h3>Create new habit</h3>
+    <input type="text" id="name" placeholder="name"  />
+    <br/>
+    <br/>
+    <input type="text" id="frequency" placeholder="weekly/daily"  />
+    <br/>
+    <br/>
+    <input type="text" id="startdate" placeholder="startdate"  />
+    <br/>
+    <br/>
+    <input type="text" id="enddate" placeholder="enddate"  />
+    <br/>
+    <br/>
+    <input type="text" id="hour" placeholder="hour"  />
+    <br/>
+    <br/>
+    <button onclick=createHabit()>Create User</button>
 </body>
 </html>
