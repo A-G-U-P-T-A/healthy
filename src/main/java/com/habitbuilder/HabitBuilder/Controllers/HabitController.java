@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -43,7 +45,8 @@ public class HabitController {
 
     @CrossOrigin
     @GetMapping(value = "/markdone")
-    public void updateHabit(@RequestParam String name, @RequestParam String date) {
+    public RedirectView updateHabit(@RequestParam String name, @RequestParam String date) {
         habitService.updateHabitCompletion(name, date);
+        return new RedirectView("https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/user.html");
     }
 }
