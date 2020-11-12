@@ -59,12 +59,15 @@
                 document.write("<h3>"+key + "</h3><br/>");
                 Object.keys(value).forEach(function(date) {
                     var stars = value[date];
-                    document.write("<h5>"+date + " </h5>" + stars + "" +"<br/>");
-                    if(stars===0)
-                    document.write("<a href='/markdone?name=" + key + "&" + "date=" + date + "'>mark done</a><br/>");
-                    else
-                    starsum = starsum + (+stars);
-                    totalstars = totalstars + (+stars);
+                    document.write("<h5>"+date + " </h5>" + stars + " ");
+                    if(stars===0) {
+                        document.write("<a href='/markdone?name=" + key + "&" + "date=" + date + "'>mark done</a><br/>");
+                        totalstars = totalstars + (+1);
+                    }
+                    else{
+                        starsum = starsum + (+stars);
+                        totalstars = totalstars + (+1);
+                    }
                 });
             });
             document.write("<br/><h2>Stars Collected By User =" + starsum + "</h2><br/>");
