@@ -30,7 +30,7 @@
                 window.location = "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com";
             }
             var userHabits = JSON.parse(httpGetData(userId));
-            Object.keys(jsonData).forEach(function(key) {
+            Object.keys(userHabits).forEach(function(key) {
                 var value = jsonData[key];
                 document.write("<h3>"+key + "</h3><br/>");
             });
