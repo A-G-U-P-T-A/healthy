@@ -49,4 +49,5 @@ public class HabitController {
         habitService.updateHabitCompletion(name, date);
         return new RedirectView("https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/user.html");
     }
+
 }

@@ -51,6 +51,8 @@
             if(userId==null) {
                 window.location = "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com";
             }
+            var starsum=0;
+            var totalstars=0;
             var userHabits = JSON.parse(httpGetData(userId));
             Object.keys(userHabits).forEach(function(key) {
                 var value = userHabits[key];
@@ -60,8 +62,13 @@
                     document.write("<h5>"+date + " </h5>" + stars + "" +"<br/>");
                     if(stars===0)
                     document.write("<a href='/markdone?name=" + key + "&" + "date=" + date + "'>mark done</a><br/>");
+                    else
+                    starsum = starsum + (+stars);
+                    totalstars = totalstars + (+stars);
                 });
             });
+            document.write("<br/><h2>Stars Collected By User =" +starsum+ "</h2><br/>");
+            document.write("<br/><h2>Stars Total to be collected by User =" +totalstars+ "</h2><br/>");
             console.log(userHabits);
     </script>
     <h3>Create new habit</h3>
