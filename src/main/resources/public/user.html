@@ -31,7 +31,7 @@
             }
             var userHabits = JSON.parse(httpGetData(userId));
             Object.keys(userHabits).forEach(function(key) {
-                var value = jsonData[key];
+                var value = userHabits[key];
                 document.write("<h3>"+key + "</h3><br/>");
             });
             console.log(userHabits);
