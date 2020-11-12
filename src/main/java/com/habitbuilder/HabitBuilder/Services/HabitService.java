@@ -71,7 +71,7 @@ public class HabitService {
         document.append("userid", habit.getUserId());
         document.append("name", habit.getName());
         document.append("frequency", habit.getFrequency());
-        document.append("hour", habit.hour);
+        document.append("hour", habit.getHour());
         HashMap<String, Integer> habitRep = new HashMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.parse(habit.getStartDate(),formatter);
