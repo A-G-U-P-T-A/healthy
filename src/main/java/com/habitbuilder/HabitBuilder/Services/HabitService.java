@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.habitbuilder.HabitBuilder.Constants.Frequency;
 import com.habitbuilder.HabitBuilder.Objects.Habit;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
+import com.sun.xml.internal.bind.v2.runtime.FilterTransducer;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -55,14 +57,13 @@ public class HabitService {
         }
         HashMap habitRepUpdated = null;
         try {
-            habitRepUpdated = ObjectMapperService.getObjectMapper().readValue(habitRep.toString(), HashMap.class);
+            habitRepUpdated = ObjectMapperService.getObjectMapper().readValue(habitRep.toJson(), HashMap.class);
             habitRepUpdated.replace(date, 1);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        Bson document = Filters.eq("habitRep", habitRepUpdated);
-        //HashMap<String, Integer> habitRepUpdated = new HashMap<>();
-        return mongoService.updateData("habit", filter, document);
+        BasicDBObject update = new BasicDBObject().append("$set", new BasicDBObject().append("habitRep", habitRepUpdated));
+        return mongoService.updateData("habit", filter, update);
     }
 
     private Document createOrderDocument(Habit habit, ObjectId objectId) {
