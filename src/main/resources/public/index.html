@@ -48,8 +48,8 @@
                 xmlHttp.send(JSON.stringify(params));
                 console.log(xmlHttp.responseText);
                 alert(xmlHttp.responseText);
-                var userId = JSON.parse(xmlHttp.responseText);
-                setCookie('loggedin', userId,7);
+                var userIdJson = JSON.parse(xmlHttp.responseText);
+                setCookie('loggedin', userIdJson.get('userId'),7);
             }
     </script>
     <style>
