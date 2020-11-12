@@ -17,7 +17,7 @@ public class UserValidation {
     @Autowired
     MongoService mongoService;
 
-    public List<String> validate(User user) {
+    public List<String> validateUserCreate(User user) {
         List<String> failedValidations = new ArrayList<>();
         if(user.getPassword()==null||user.getPassword().trim().length()==0)
             failedValidations.add("password is null");
@@ -27,6 +27,15 @@ public class UserValidation {
         long count = mongoService.getCount("user", filter);
         if(count>0)
             failedValidations.add("choose a different username");
+        return failedValidations;
+    }
+
+    public List<String> validateUserLogin(User user) {
+        List<String> failedValidations = new ArrayList<>();
+        if(user.getPassword()==null||user.getPassword().trim().length()==0)
+            failedValidations.add("password is null");
+        if(user.getUsername()==null||user.getUsername().trim().length()==0)
+            failedValidations.add("username is null");
         return failedValidations;
     }
 

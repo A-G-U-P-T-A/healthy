@@ -1,16 +1,13 @@
 package com.habitbuilder.HabitBuilder.Services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.habitbuilder.HabitBuilder.Objects.User;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
-
-import javax.xml.bind.DatatypeConverter;
-
 
 @Service
 public class UserService {
@@ -22,6 +19,27 @@ public class UserService {
         ObjectId objectId = new ObjectId();
         mongoService.createEntry("user", createOrderDocument(user, objectId));
         return objectId.toString();
+    }
+
+    public String loginUser(User user) {
+        FindIterable<Document>documents = mongoService.getData("user", loginUserFilter(user));
+        String id = null;
+        Document userInfo = null;
+        if(documents==null)
+            return id;
+        for(Document document: documents) {
+            userInfo = document;
+            break;
+        }
+        if(userInfo==null)
+            return id;
+        id = userInfo.getObjectId("_id").toString();
+        return id;
+    }
+
+    private Bson loginUserFilter(User user) {
+        Bson filter = Filters.and(Filters.eq("password", user.getPassword()), Filters.eq("username", user.getUsername()));
+        return filter;
     }
 
     private Document createOrderDocument(User user, ObjectId objectId) {

@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <title>Place Order</title>
     <script>
+            function setCookie(name,value,days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days*24*60*60*1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+            }
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0;i < ca.length;i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                }
+                return null;
+            }
             function createUser() {
                 var xmlHttp = new XMLHttpRequest();
                 var currency = "INR";
@@ -11,11 +30,26 @@
                         username: document.getElementById('username').value,
                         password: document.getElementById('password').value
                 };
-                xmlHttp.open( "POST", "http://localhost:8080/createuser", false );
+                xmlHttp.open( "POST", "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/createuser", false );
                 xmlHttp.setRequestHeader('Content-type', 'application/json');
                 xmlHttp.send(JSON.stringify(params));
                 console.log(xmlHttp.responseText);
                 alert(xmlHttp.responseText);
+            }
+            function loginUser() {
+                var xmlHttp = new XMLHttpRequest();
+                var currency = "INR";
+                const params = {
+                        username: document.getElementById('username_login').value,
+                        password: document.getElementById('password_login').value
+                };
+                xmlHttp.open( "POST", "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/loginuser", false );
+                xmlHttp.setRequestHeader('Content-type', 'application/json');
+                xmlHttp.send(JSON.stringify(params));
+                console.log(xmlHttp.responseText);
+                alert(xmlHttp.responseText);
+                var userId = JSON.parse(xmlHttp.responseText);
+                setCookie('loggedin', userId,7);
             }
     </script>
     <style>
@@ -29,8 +63,24 @@
 <body>
     <input type="text" id="username" placeholder="username" class="inputForm" />
     <br/>
+    <br/>
     <input type="text" id="password" placeholder="password" class="inputForm" />
     <br/>
+    <br/>
     <button onclick=createUser()>Create User</button>
+    <br/>
+    <br/>
+    OR LOGIN
+    <br/>
+    <br/>
+    <input type="text" id="username_login" placeholder="username" class="inputForm" />
+    <br/>
+    <br/>
+    <input type="text" id="password_login" placeholder="password" class="inputForm" />
+    <br/>
+    <br/>
+    <button onclick=loginUser()>Login User</button>
+    <br/>
+    <br/>
 </body>
 </html>
