@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Order</title>
+    <script>
+            function createUser() {
+                var xmlHttp = new XMLHttpRequest();
+                var currency = "INR";
+                const params = {
+                        username: document.getElementById('username').value,
+                        password: document.getElementById('password').value
+                };
+                xmlHttp.open( "POST", "http://localhost:8080/createuser", false );
+                xmlHttp.setRequestHeader('Content-type', 'application/json');
+                xmlHttp.send(JSON.stringify(params));
+                console.log(xmlHttp.responseText);
+                alert(xmlHttp.responseText);
+            }
+    </script>
+</head>
+<body>
+    <input type="text" id="username" placeholder="username" />
+    <br/>
+    <input type="text" id="password" placeholder="password" />
+    <br/>
+    <button onclick=createUser()>Create User</button>
+</body>
+</html>
