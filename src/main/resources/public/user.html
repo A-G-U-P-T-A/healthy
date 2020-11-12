@@ -22,7 +22,7 @@
                         endDate: document.getElementById('enddate').value,
                         hour: document.getElementById('hour').value
                 };
-                xmlHttp.open( "POST", "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/createuser", false );
+                xmlHttp.open( "POST", "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/createhabit", false );
                 xmlHttp.setRequestHeader('Content-type', 'application/json');
                 xmlHttp.send(JSON.stringify(params));
                 console.log(xmlHttp.responseText);
