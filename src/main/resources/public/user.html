@@ -61,10 +61,11 @@
                     var stars = value[date];
                     document.write("<h5>"+date + " ");
                     if(stars===0) {
-                        document.write("<a href='/markdone?name=" + key + "&" + "date=" + date + "'>mark done</a></h5><br/>");
+                        document.write("<a href='/markdone?name=" + key + "&" + "date=" + date + "'>mark done</a></h5>");
                         totalstars = totalstars + (+1);
                     }
                     else{
+                        document.write("</h5>");
                         starsum = starsum + (+stars);
                         totalstars = totalstars + (+1);
                     }
