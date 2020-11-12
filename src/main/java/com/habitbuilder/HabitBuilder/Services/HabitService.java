@@ -8,7 +8,6 @@ import com.habitbuilder.HabitBuilder.Objects.Habit;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
-import com.sun.xml.internal.bind.v2.runtime.FilterTransducer;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
