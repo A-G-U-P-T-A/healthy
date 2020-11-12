@@ -43,7 +43,7 @@ public class HabitController {
 
     @CrossOrigin
     @GetMapping(value = "/markdone")
-    public @ResponseBody Object updateHabit(@RequestParam String name, @RequestParam String date) {
-        return habitService.updateHabitCompletion(name, date);
+    public void updateHabit(@RequestParam String name, @RequestParam String date) {
+        habitService.updateHabitCompletion(name, date);
     }
 }
