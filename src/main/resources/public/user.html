@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title>User Habits with concurrent dates. 0 for non completion 1 for completion</title>
 </head>
 <body>
     <script>
@@ -35,7 +35,7 @@
                 document.write("<h3>"+key + "</h3><br/>");
                 Object.keys(value).forEach(function(date) {
                     var stars = value[date];
-                    document.write("<h5>"+date + " </h5>" + stars + "<br/>");
+                    document.write("<h5>"+date + " </h5>" + stars + "<button id='date'> </button>" +"<br/>");
                 });
             });
             console.log(userHabits);
