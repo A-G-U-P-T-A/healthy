@@ -6,10 +6,12 @@
 </head>
 <body>
     <script>
-            function httpGetData()
+            function httpGetData(var userId)
             {
                 var xmlHttp = new XMLHttpRequest();
-                xmlHttp.open( "GET", "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/getuserhabit", false );
+                var url = "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com/getuserhabit?userId="+userId;
+                console.log(url);
+                xmlHttp.open( "GET", url, false );
                 xmlHttp.send( null );
                 return xmlHttp.responseText;
             }
@@ -27,15 +29,9 @@
             if(userId==null) {
                 window.location = "https://healthy-main-qmadvtmipkdvvsz6k.herokuapp.com";
             }
-            var orders = httpGetData();
-            var ordersIdList = orders.substring(1,orders.length-1).split(",");
-            for(i=0;i<ordersIdList.length;i++) {
-                ordersIdList[i] = ordersIdList[i].substring(1,ordersIdList[i].length-1);
-                document.write(
-                    //"<button onclick=onSubmit(this.attributes['id'].value) type='button' value='pay amount for' id='"+ordersIdList[i]+"'>"+ordersIdList[i]+"</button><br />"
-                    ordersIdList[i]+"<br/><br/>"
-                );
-            }
+            var userHabits = JSON.parse(httpGetData(userId));
+
+            console.log(userHabits);
     </script>
 </body>
 </html>
