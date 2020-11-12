@@ -36,5 +36,9 @@ public class MongoService {
     public FindIterable<Document> getData(String collectionName, Bson filter) {
         return mongoClient.getDatabase(dbName).getCollection(collectionName).find(filter);
     }
+
+    public Document updateData(String collectionName, Bson filter, Bson update) {
+        return mongoClient.getDatabase(dbName).getCollection(collectionName).findOneAndUpdate(filter, update);
+    }
 }
 

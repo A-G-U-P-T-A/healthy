@@ -45,6 +45,12 @@ public class HabitService {
         return objectNode;
     }
 
+    public Object updateHabitCompletion(String name, String date) {
+        Bson filter = Filters.eq("name", name);
+        Bson update = Filters.eq("habitRep."+date, 1);
+        return mongoService.updateData("habit", filter, update);
+    }
+
     private Document createOrderDocument(Habit habit, ObjectId objectId) {
         Document document = new Document();
         document.append("_id", objectId);

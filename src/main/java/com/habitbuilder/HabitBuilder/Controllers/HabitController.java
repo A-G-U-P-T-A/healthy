@@ -40,4 +40,10 @@ public class HabitController {
     public @ResponseBody Object listHabits(@RequestParam String userid) {
         return habitService.getHabitsList(userid);
     }
+
+    @CrossOrigin
+    @GetMapping(value = "/markdone")
+    public @ResponseBody Object updateHabit(@RequestParam String name, @RequestParam String date) {
+        return habitService.updateHabitCompletion(name, date);
+    }
 }
