@@ -73,6 +73,16 @@
             });
             document.write("<br/><h2>Stars Collected By User =" + starsum + "</h2><br/>");
             document.write("<br/><h2>Stars Total to be collected by User =" + totalstars + "</h2><br/>");
+            if(starsum<totalstars/5)
+                document.write("novice");
+            if(starsum<totalstars/4)
+                document.write("still a novice");
+            if(starsum<totalstars/3)
+                document.write("semi pro");
+            if(starsum<totalstars/2)
+                document.write("pro");
+            if(starsum<totalstars)
+                document.write("world class");
             console.log(userHabits);
     </script>
     <h3>Create new habit</h3>
