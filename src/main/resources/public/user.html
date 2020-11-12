@@ -40,7 +40,7 @@
                 document.write("<h3>"+key + "</h3><br/>");
                 Object.keys(value).forEach(function(date) {
                     var stars = value[date];
-                    document.write("<h5>"+date + " </h5>" + stars + "<button onclick=markDone(this.id, userId, key) id='" + date + "'>Mark Done</button>" +"<br/>");
+                    document.write("<h5>"+date + " </h5>" + stars + "<button onclick=markDone(id, userId, key) id='" + date + "'>Mark Done</button>" +"<br/>");
                 });
             });
             console.log(userHabits);
