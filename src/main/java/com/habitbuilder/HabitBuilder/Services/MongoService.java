@@ -3,12 +3,10 @@ package com.habitbuilder.HabitBuilder.Services;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-import jdk.nashorn.internal.ir.ObjectNode;
+import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MongoService {
@@ -37,8 +35,8 @@ public class MongoService {
         return mongoClient.getDatabase(dbName).getCollection(collectionName).find(filter);
     }
 
-    public Document updateData(String collectionName, Bson filter, Bson update) {
-        return mongoClient.getDatabase(dbName).getCollection(collectionName).findOneAndUpdate(filter, update);
+    public UpdateResult updateData(String collectionName, Bson filter, Bson update) {
+        return mongoClient.getDatabase(dbName).getCollection(collectionName).updateOne(filter, update);
     }
 }
 

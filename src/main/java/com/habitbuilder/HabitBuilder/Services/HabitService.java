@@ -1,5 +1,6 @@
 package com.habitbuilder.HabitBuilder.Services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.habitbuilder.HabitBuilder.Constants.Frequency;
@@ -45,10 +46,23 @@ public class HabitService {
         return objectNode;
     }
 
-    public Object updateHabitCompletion(String name, String date) {
+    public com.mongodb.client.result.UpdateResult updateHabitCompletion(String name, String date) {
         Bson filter = Filters.eq("name", name);
-        Bson update = Filters.eq("habitRep."+date, 1);
-        return mongoService.updateData("habit", filter, update);
+        FindIterable<Document>documents = mongoService.getData("habit", filter);
+        Document habitRep = null;
+        for(Document document: documents) {
+            habitRep = (Document) document.get("habitRep");
+        }
+        HashMap habitRepUpdated = null;
+        try {
+            habitRepUpdated = ObjectMapperService.getObjectMapper().readValue(habitRep.toString(), HashMap.class);
+            habitRepUpdated.replace(date, 1);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        Bson document = Filters.eq("habitRep", habitRepUpdated);
+        //HashMap<String, Integer> habitRepUpdated = new HashMap<>();
+        return mongoService.updateData("habit", filter, document);
     }
 
     private Document createOrderDocument(Habit habit, ObjectId objectId) {
